@@ -13,14 +13,14 @@ pipeline {
         disableConcurrentBuilds()
         ansiColor('xterm')
     }
-    
+   
     stages {
         stage('init') {
             steps {
                 script {
                     withAWS(credentials: 'aws-creds', region: 'us-east-1') {
                         sh """
-                            cd 00-vpc
+                            cd 80-eks
                             terraform init -reconfigure
                         """
                     }
@@ -33,7 +33,7 @@ pipeline {
                 script {
                     withAWS(credentials: 'aws-creds', region: 'us-east-1') {
                         sh """
-                            cd 00-vpc
+                            cd 80-eks
                             terraform plan
                         """
                     }
@@ -50,25 +50,14 @@ pipeline {
                 script {
                     withAWS(credentials: 'aws-creds', region: 'us-east-1') {
                         sh """
-                            cd 00-vpc
+                            cd 80-eks
                             terraform apply -auto-approve
                         """
                     }
                 }
             }
         }
-            //down stream job
-        stage('Triggering SG') {
-            steps {
-                script {
-                build job: '10-sg', 
-                  propagate: false, //up stream job will not fail even sg fails
-                  wait: false // vpc will not wait
-                }
-            }
-        }
-    }
-      
+
     post { 
         always { 
             echo 'I will always say Hello again!'
