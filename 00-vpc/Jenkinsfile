@@ -62,7 +62,7 @@ pipeline {
             steps {
                 build job: '10-sg', 
                   propagate: false, //up stream job will not fail even sg fails
-                  wait: false, // vpc will not wait
+                  wait: false // vpc will not wait
                      
         }
         
