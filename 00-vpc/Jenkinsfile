@@ -56,8 +56,9 @@ pipeline {
                     }
                 }
             }
+        }
             //down stream job
-            stage('Triggering SG') {
+         stage('Triggering SG') {
             steps {
                 build job: '10-sg', 
                   propagate: false, //up stream job will not fail even sg fails
