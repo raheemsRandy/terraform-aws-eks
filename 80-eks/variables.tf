@@ -7,9 +7,9 @@ variable "environment" {
 }
 
 variable "zone_id" {
-    default = "Z032558618100M4EJX8X4"
+    default = "Z03949492VIIV3UN1MEFO"
 }
 
 variable "zone_name" {
-    default = "daws84s.site"
+    default = "raheemweb.fun"
 }
